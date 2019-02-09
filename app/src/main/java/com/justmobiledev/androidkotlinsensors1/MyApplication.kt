@@ -5,9 +5,15 @@ import android.content.Context
 
 class MyApplication : Application() {
 
+    init {
+        instance = this
+    }
+
     companion object {
-        fun getContext(): Context{
-            return this.getContext()
+        private var instance: MyApplication? = null
+
+        fun getApplicationContext() : Context {
+            return instance!!.applicationContext
         }
     }
 

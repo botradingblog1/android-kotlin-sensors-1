@@ -14,10 +14,9 @@ object SensorCollector: SensorEventListener {
 
     private var sensorManager : SensorManager ?= null
     private var accelerometer : Sensor ?= null
-    private var context : Context ?= null
 
     init{
-        sensorManager = (MyApplication.getContext().getSystemService(Service.SENSOR_SERVICE)) as SensorManager
+        sensorManager = (MyApplication.getApplicationContext().getSystemService(Service.SENSOR_SERVICE)) as SensorManager
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
