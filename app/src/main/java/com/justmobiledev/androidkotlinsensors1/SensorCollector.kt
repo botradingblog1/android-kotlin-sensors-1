@@ -1,8 +1,9 @@
 package com.justmobiledev.androidkotlinsensors1
 
+import android.app.Service
 import android.content.Context
 import android.hardware.SensorManager
-import android.support.v4.content.ContextCompat.getSystemService
+
 
 object SensorCollector{
 
@@ -10,7 +11,8 @@ object SensorCollector{
     var mySensorManager : SensorManager
 
     init{
-        mySensorManager = getSystemService(cntext, Context.SENSOR_SERVICE) as SensorManager;
+        mySensorManager = (context.getSystemService(Service.SENSOR_SERVICE)) as SensorManager
+
     }
 
     fun addContext(ctx : Context){
