@@ -13,7 +13,9 @@ import android.view.View
 import android.widget.Toast
 import com.justmobiledev.androidkotlinsensors1.models.MySensorEvent
 import com.justmobiledev.androidkotlinsensors1.models.SensorType
+import com.justmobiledev.androidkotlinsensors1.sensormanagers.GyroSensorManager
 import com.justmobiledev.androidkotlinsensors1.sensormanagers.LightSensorManager
+import com.justmobiledev.androidkotlinsensors1.sensormanagers.TempSensorManager
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -26,28 +28,46 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
-
+        // Set handlers
         LightSensorManager.setHandler(handler)
+        TempSensorManager.setHandler(handler)
+        GyroSensorManager.setHandler(handler)
 
         // Register Button Clicks
         buttonStart.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
                 if (!LightSensorManager.sensorExists()){
-                    tvListSensorValue.text = "No Light Sensor"
+                    tvLightSensorValue.text = "No Light Sensor"
                 }
                 else {
                     LightSensorManager.startSensor()
+                }
+
+                if (!TempSensorManager.sensorExists()){
+                    tvTempSensorValue.text = "No Temperature Sensor"
+                }
+                else {
+                    TempSensorManager.startSensor()
+                }
+
+                if (!GyroSensorManager.sensorExists()){
+                    tvGyroSensorValue.text = "No Gyroscope Sensor"
+                }
+                else {
+                    GyroSensorManager.startSensor()
                 }
             }})
 
         buttonStop.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
                 LightSensorManager.stopSensor()
-                tvListSensorValue.text = ""
+                tvLightSensorValue.text = ""
+
+                TempSensorManager.stopSensor()
+                tvTempSensorValue.text = ""
+
+                GyroSensorManager.stopSensor()
+                tvGyroSensorValue.text = ""
             }})
     }
 
@@ -80,10 +100,16 @@ class MainActivity : AppCompatActivity() {
 
             // Light Sensor events
             if (sensorEvent.type == SensorType.LIGHT){
-                tvListSensorValue.text = sensorEvent.value
+                tvLightSensorValue.text = sensorEvent.value
             }
-            Log.d("cxs", "event: "+sensorEvent.type)
-
+            // Temperature events
+            else if (sensorEvent.type == SensorType.TEMPERATURE){
+                tvTempSensorValue.text = sensorEvent.value
+            }
+            // Gyroscope events
+            else if (sensorEvent.type == SensorType.GYRO){
+                tvGyroSensorValue.text = sensorEvent.value
+            }
         }
     }
 }
