@@ -56,50 +56,26 @@ object LightSensorManager :
         if (event != null && event.values.isNotEmpty()) {
             // ground!!.updateMe(event.values[1] , event.values[0])
             //Log.d(TAG, ""+event.values[1]+", "+event.values[0])
-            Log.d(TAG, "onSensorChanged: "+event.values[0])
+            //Log.d(TAG, "onSensorChanged: "+event.values[0])
 
             var msgEvent = MySensorEvent()
             msgEvent.type = SensorType.LIGHT
+            msgEvent.value = event.values[0].toString()
 
             // Send message to MainActivity
-            MainActivity.SensorEventHandler.sendMessage(msgEvent)
+            sendMessage(msgEvent)
         }
     }
 
-    /* private fun getHandler(looper: Looper): Handler {
-        //1
-        return object:Handler(looper) {
-            //2
-            override fun handleMessage(msg: Message?) {
-                super.handleMessage(msg)
+    fun setHandler(handler: Handler){
+        this.handler = handler
+    }
 
-                /* val foodOrder = msg?.obj as FoodOrder
-                //4
-                foodOrder.foodPrice = convertCurrency(foodOrder.foodPrice)
-                //5
-                foodOrder.sideOrder = attachSideOrder()
-                //6
-                val processedMessage = Message()
-                //7
-                processedMessage.obj = foodOrder*/
+    fun sendMessage(sensorEvent: MySensorEvent) {
+        if (handler == null) return
 
-                //uiHandler.sendMessage(processedMessage)
-            }
+        handler?.obtainMessage(sensorEvent.type.ordinal, sensorEvent)?.apply {
+            sendToTarget()
         }
     }
-
-    fun sendOrder(foodOrder: FoodOrder) {
-        //1
-        val message = Message()
-        //2
-        message.obj = foodOrder
-        //3
-        handler?.sendMessage(message)
-    }
-
-    override fun onLooperPrepared() {
-        super.onLooperPrepared()
-
-        handler = getHandler(looper)
-    }*/
 }

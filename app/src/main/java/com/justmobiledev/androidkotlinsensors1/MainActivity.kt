@@ -11,9 +11,13 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import com.justmobiledev.androidkotlinsensors1.models.MySensorEvent
+import com.justmobiledev.androidkotlinsensors1.models.SensorType
 import com.justmobiledev.androidkotlinsensors1.sensormanagers.LightSensorManager
 
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_main.*
+
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +34,8 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Light sensor does not exists", Toast.LENGTH_LONG)
         }
         else {
+            // Set the handler
+            LightSensorManager.setHandler(handler)
             LightSensorManager.startSensor()
         }
 
@@ -52,27 +58,22 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    // Handle messages
+    val handler: Handler = object : Handler(Looper.getMainLooper()) {
+        /*
+         * handleMessage() defines the operations to perform when
+         * the Handler receives a new Message to process.
+         */
+        override fun handleMessage(inputMessage: Message) {
+            // Gets the image task from the incoming Message object.
+            val sensorEvent = inputMessage.obj as MySensorEvent
 
-    object SensorEventHandler {
-        // Handle messages
-        val handler: Handler = object : Handler(Looper.getMainLooper()) {
-            /*
-             * handleMessage() defines the operations to perform when
-             * the Handler receives a new Message to process.
-             */
-            override fun handleMessage(inputMessage: Message) {
-                // Gets the image task from the incoming Message object.
-                val sensorEvent = inputMessage.obj as MySensorEvent
-                Log.d("cxs", "event: "+sensorEvent.type)
-
+            // Light Sensor events
+            if (sensorEvent.type == SensorType.LIGHT){
+                tvListSensorValue.text = sensorEvent.value
             }
-        }
+            Log.d("cxs", "event: "+sensorEvent.type)
 
-        fun sendMessage(sensorEvent: MySensorEvent) {
-            handler.obtainMessage(sensorEvent.type.ordinal, sensorEvent)?.apply {
-                sendToTarget()
-            }
         }
-
     }
 }
