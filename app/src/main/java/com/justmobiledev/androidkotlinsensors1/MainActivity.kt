@@ -6,9 +6,12 @@ import android.os.Looper
 import android.os.Message
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import com.justmobiledev.androidkotlinsensors1.models.MySensorEvent
+import com.justmobiledev.androidkotlinsensors1.sensormanagers.LightSensorManager
 
 import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
@@ -23,12 +26,12 @@ class MainActivity : AppCompatActivity() {
                     .setAction("Action", null).show()
         }
 
-        /* if (!SensorCollector.sensorExists()){
-            Toast.makeText(this, "Temp sensor does not exists", Toast.LENGTH_LONG)
+        if (!LightSensorManager.sensorExists()){
+            Toast.makeText(this, "Light sensor does not exists", Toast.LENGTH_LONG)
         }
         else {
-            SensorCollector.start()
-        }*/
+            LightSensorManager.startSensor()
+        }
 
     }
 
@@ -48,16 +51,28 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Handle messages
-    private val handler: Handler = object : Handler(Looper.getMainLooper()) {
-        /*
-         * handleMessage() defines the operations to perform when
-         * the Handler receives a new Message to process.
-         */
-        override fun handleMessage(inputMessage: Message) {
-            // Gets the image task from the incoming Message object.
-            //val photoTask = inputMessage.obj as PhotoTask
 
+
+    object SensorEventHandler {
+        // Handle messages
+        val handler: Handler = object : Handler(Looper.getMainLooper()) {
+            /*
+             * handleMessage() defines the operations to perform when
+             * the Handler receives a new Message to process.
+             */
+            override fun handleMessage(inputMessage: Message) {
+                // Gets the image task from the incoming Message object.
+                val sensorEvent = inputMessage.obj as MySensorEvent
+                Log.d("cxs", "event: "+sensorEvent.type)
+
+            }
         }
+
+        fun sendMessage(sensorEvent: MySensorEvent) {
+            handler.obtainMessage(sensorEvent.type.ordinal, sensorEvent)?.apply {
+                sendToTarget()
+            }
+        }
+
     }
 }

@@ -8,7 +8,10 @@ import android.hardware.SensorManager
 import android.os.Handler
 import android.os.HandlerThread
 import android.util.Log
+import com.justmobiledev.androidkotlinsensors1.MainActivity
 import com.justmobiledev.androidkotlinsensors1.MyApplication
+import com.justmobiledev.androidkotlinsensors1.models.MySensorEvent
+import com.justmobiledev.androidkotlinsensors1.models.SensorType
 
 object LightSensorManager : 
     HandlerThread("LightSensorManager"), SensorEventListener {
@@ -53,7 +56,13 @@ object LightSensorManager :
         if (event != null && event.values.isNotEmpty()) {
             // ground!!.updateMe(event.values[1] , event.values[0])
             //Log.d(TAG, ""+event.values[1]+", "+event.values[0])
-            Log.d(TAG, "onSensorChanged: "+event.values[0]);
+            Log.d(TAG, "onSensorChanged: "+event.values[0])
+
+            var msgEvent = MySensorEvent()
+            msgEvent.type = SensorType.LIGHT
+
+            // Send message to MainActivity
+            MainActivity.SensorEventHandler.sendMessage(msgEvent)
         }
     }
 
