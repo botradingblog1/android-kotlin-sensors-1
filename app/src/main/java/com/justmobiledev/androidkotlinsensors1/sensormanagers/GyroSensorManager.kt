@@ -58,7 +58,7 @@ object GyroSensorManager :
             msgEvent.type = SensorType.GYRO
 
             // Format event values
-            msgEvent.value = "x: "+event.values[0]+", y: "+event.values[1]+", z: "+event.values[2]
+            msgEvent.value = "x: "+event.values[0]+"\ny: "+event.values[1]+"\nz: "+event.values[2]
 
             // Send message to MainActivity
             sendMessage(msgEvent)

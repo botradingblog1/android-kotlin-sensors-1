@@ -36,17 +36,17 @@
     </LinearLayout>
 
     <!-- Light Sensor Output -->
+    <TextView
+            android:id="@+id/tvLightSensorLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/vertical_spacing"
+            android:textStyle="bold"
+            android:text="Light Sensor: "/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/vertical_spacing"
         android:orientation="horizontal">
-        <TextView
-                android:id="@+id/tvLightSensorLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="Light Sensor: "/>
         <TextView
                 android:id="@+id/tvLightSensorValue"
                 android:layout_width="wrap_content"
@@ -60,17 +60,18 @@
     </LinearLayout>
 
     <!-- Temperature Sensor Output -->
+    <TextView
+            android:id="@+id/tvTempSensorLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/vertical_spacing"
+            android:textStyle="bold"
+            android:text="Temperature Sensor: "/>
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/vertical_spacing"
             android:orientation="horizontal">
-        <TextView
-                android:id="@+id/tvTempSensorLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="Temperature Sensor: "/>
+
         <TextView
                 android:id="@+id/tvTempSensorValue"
                 android:layout_width="wrap_content"
@@ -84,17 +85,17 @@
     </LinearLayout>
 
     <!-- Gyroscope Sensor Output -->
+    <TextView
+            android:id="@+id/tvGyroSensorLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/vertical_spacing"
+            android:textStyle="bold"
+            android:text="Gyroscope Sensor: "/>
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/vertical_spacing"
             android:orientation="horizontal">
-        <TextView
-                android:id="@+id/tvGyroSensorLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="Gyroscope Sensor: "/>
         <TextView
                 android:id="@+id/tvGyroSensorValue"
                 android:layout_width="wrap_content"
