@@ -1,10 +1,14 @@
 package com.justmobiledev.androidkotlinsensors1
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.os.Message
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 
 import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
@@ -19,8 +23,13 @@ class MainActivity : AppCompatActivity() {
                     .setAction("Action", null).show()
         }
 
+        /* if (!SensorCollector.sensorExists()){
+            Toast.makeText(this, "Temp sensor does not exists", Toast.LENGTH_LONG)
+        }
+        else {
+            SensorCollector.start()
+        }*/
 
-        SensorCollector.start()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -36,6 +45,19 @@ class MainActivity : AppCompatActivity() {
         return when(item.itemId) {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    // Handle messages
+    private val handler: Handler = object : Handler(Looper.getMainLooper()) {
+        /*
+         * handleMessage() defines the operations to perform when
+         * the Handler receives a new Message to process.
+         */
+        override fun handleMessage(inputMessage: Message) {
+            // Gets the image task from the incoming Message object.
+            //val photoTask = inputMessage.obj as PhotoTask
+
         }
     }
 }
