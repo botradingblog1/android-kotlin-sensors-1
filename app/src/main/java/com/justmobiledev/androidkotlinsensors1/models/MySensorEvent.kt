@@ -7,6 +7,4 @@ enum class SensorType(i: Int) {
 class MySensorEvent {
     var type = SensorType.LIGHT
     var value = ""
-
-
 }

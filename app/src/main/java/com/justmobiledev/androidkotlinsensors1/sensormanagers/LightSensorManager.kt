@@ -32,7 +32,6 @@ object LightSensorManager :
         } else {
             sensorExists = false
         }
-
     }
 
     fun startSensor(){

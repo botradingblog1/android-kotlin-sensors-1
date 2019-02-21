@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import com.justmobiledev.androidkotlinsensors1.models.MySensorEvent
 import com.justmobiledev.androidkotlinsensors1.models.SensorType
@@ -30,15 +31,24 @@ class MainActivity : AppCompatActivity() {
                     .setAction("Action", null).show()
         }
 
-        if (!LightSensorManager.sensorExists()){
-            Toast.makeText(this, "Light sensor does not exists", Toast.LENGTH_LONG)
-        }
-        else {
-            // Set the handler
-            LightSensorManager.setHandler(handler)
-            LightSensorManager.startSensor()
-        }
+        LightSensorManager.setHandler(handler)
 
+        // Register Button Clicks
+        buttonStart.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                if (!LightSensorManager.sensorExists()){
+                    tvListSensorValue.text = "No Light Sensor"
+                }
+                else {
+                    LightSensorManager.startSensor()
+                }
+            }})
+
+        buttonStop.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                LightSensorManager.stopSensor()
+                tvListSensorValue.text = ""
+            }})
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
