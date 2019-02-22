@@ -7,7 +7,7 @@ It implements asynchronous sensor data collection for light, temperature and gyr
 ## Supporting material
 For more detailed information about the implementation, please see my [blog post on exploring device sensors with Kotlin](http://justmobiledev.com/exploring-device-sensors-with-kotlin/).
 
-The Android documentation on the [Sensor Manager](https://developer.android.com/reference/android/hardware/SensorManager.html) and [Sensor Types](https://source.android.com/devices/sensors/sensor-types) is a good read to better understand the project.
+The Android documentation on [Sensor Manager](https://developer.android.com/reference/android/hardware/SensorManager.html) and [Sensor Types](https://source.android.com/devices/sensors/sensor-types) is a good read to better understand the project.
 
 ## Getting Started
 1. Cone the project from GitHub
@@ -16,7 +16,7 @@ The Android documentation on the [Sensor Manager](https://developer.android.com/
 	git clone https://github.com/justmobiledev/android-kotlin-sensors-1.git
 ```
 2. Build the project in AndroidStudio
-3. Deploy the app on an actual device so you can see live sensor readings (versus emulator)
+3. Deploy the app on an actual device so you can see live sensor readings
 
 
 ## Implementation
