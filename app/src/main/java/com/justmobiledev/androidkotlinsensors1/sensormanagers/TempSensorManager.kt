@@ -20,7 +20,8 @@ object TempSensorManager :
     private var sensorManager : SensorManager?= null
     private var sensor : Sensor?= null
     private var sensorExists = false
-
+    private var sensorThread: HandlerThread? = null
+    private var sensorHandler: Handler? = null
 
     init{
         sensorManager = (MyApplication.getApplicationContext().getSystemService(Service.SENSOR_SERVICE)) as SensorManager
@@ -35,8 +36,13 @@ object TempSensorManager :
     }
 
     fun startSensor(){
+        sensorThread = HandlerThread(TAG, Thread.NORM_PRIORITY)
+        sensorThread!!.start()
+        sensorHandler = Handler(sensorThread!!.getLooper()) //Blocks until looper is prepared, which is fairly quick
         sensorManager!!.registerListener(this,
-            sensor, SensorManager.SENSOR_DELAY_NORMAL)
+            sensor, SensorManager.SENSOR_DELAY_NORMAL,
+            sensorHandler
+        )
     }
 
     fun stopSensor(){

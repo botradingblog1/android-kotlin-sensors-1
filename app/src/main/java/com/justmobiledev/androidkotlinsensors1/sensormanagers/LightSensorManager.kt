@@ -20,6 +20,8 @@ object LightSensorManager :
     private var sensorManager : SensorManager?= null
     private var sensor : Sensor?= null
     private var sensorExists = false
+    private var sensorThread: HandlerThread? = null
+    private var sensorHandler: Handler? = null
 
 
     init{
@@ -35,12 +37,15 @@ object LightSensorManager :
     }
 
     fun startSensor(){
-        sensorManager!!.registerListener(this,
-            sensor, SensorManager.SENSOR_DELAY_NORMAL)
+        sensorThread = HandlerThread(TAG, Thread.NORM_PRIORITY)
+        sensorThread!!.start()
+        sensorHandler = Handler(sensorThread!!.getLooper()) //Blocks until looper is prepared, which is fairly quick
+        sensorManager!!.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL, sensorHandler)
     }
 
     fun stopSensor(){
         sensorManager!!.unregisterListener(this)
+        sensorThread!!.quitSafely()
     }
 
     fun sensorExists() : Boolean{
