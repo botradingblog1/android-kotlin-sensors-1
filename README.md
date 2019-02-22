@@ -30,9 +30,9 @@ You can right-click on the file and 'Save As' to a temp directory on your comput
 
 
 ## Sample App Usage
-1. When the app is started, you can enter a preference value into the first field.
-2. Press the 'Start' button to encrypt key and value and store them into the preferences xml file
-3. The app fetches the preferences again, decrypts the value and displays them in the second text field.
+1. Select the 'START' button to start collecting sensor data from the light sensor, temperature sensor and gyroscope
+2. In case the device does not have a corresponding sensor, it will display 'sensor not available'
+3. Press the 'STOP' button to stop collecting data.
 
 ## Screenshots
 ![Kotlin Sensors 1](screenshots/android-kotlin-sensors-1.png?raw=true "Kotlin Sensors 1")
