@@ -20,14 +20,12 @@ The Android documentation on [Sensor Types](https://source.android.com/devices/s
 
 
 ## Implementation
-* The SecurePrefsBuilder is a builder class used to specify properties for your shared preferences, e.g. file name, or if keys should be encrypted.
-* The wrapper around the standard SharedPreferences is implemented in the SecurePrefs class.
-* The project uses the Android KeyGenerator to create an AES-256 encryption key, which is safely stored in the Keystore.
-* When you set values, the key and the value is encrypted in the SharedPrefs class with the encryption key retrieved from the Keystore before they are stored in the shared preferences XML file.
-* When you get values, they key is encrypted to look up the value, the value is decrypted from the shared preferences XML file. For both actions the encryption key is retrieved from the Keystore.
-* To see how your key and value are stored, open the 'Device Explorer' from the right Android Studio tab, and go to data\data\com.mobile.justmobiledev.androidsecurepreferences1\shared_prefs\my_secure_prefs_file.xml.
-You can right-click on the file and 'Save As' to a temp directory on your computer. The file content should show the encrypted key and value, e.g.
-
+* The sensor collection classes are implemented as singletons: LightSensorManager, GyroSensorManager and TempSensorManager
+* These manager classes get a reference to the SensorManager and then the corresponding Sensor.
+* In order to perform asynchronous data collection, the managers use a HandlerThread and a Handler that gets the HandlerThread's looper.
+Then the handler is passed into the SensorManager, registerListener() method.
+* In order to pass sensor event data back to the controller, the controller registers a handler with the custom sensor manager classes.
+When a new sensor event arrives, the custom sensor manager processes the event and sends a handler message to the controller for display in the view.
 
 ## Sample App Usage
 1. Select the 'START' button to start collecting sensor data from the light sensor, temperature sensor and gyroscope
