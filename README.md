@@ -80,4 +80,4 @@ You can right-click on the file and 'Save As' to a temp directory on your comput
 3. The app fetches the preferences again, decrypts the value and displays them in the second text field.
 
 ## Screenshots
-![Secure Preferences](screenshots/secure_preferences_ss_1.png?raw=true "Secure Preferences")
+![Kotlin Sensors 1](screenshots/android-kotlin-sensors-1.png?raw=true "Kotlin Sensors 1")
