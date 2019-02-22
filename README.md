@@ -10,47 +10,14 @@ For more detailed information about the implementation, please see my [blog post
 The Android documentation on [Sensor Types](https://source.android.com/devices/sensors/sensor-types) is a good read to better understand the project.
 
 ## Getting Started
-Clone the project
+1. Cone the project from GitHub
 
 ```
-	allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
-	}
+	git clong https://github.com/justmobiledev/android-kotlin-sensors-1.git
 ```
+2. Build the project in AndroidStudio
+3. Deploy the app on an actual device, so you can see live sensor readings (versus emulator)
 
-Add the dependency to your app bild.gradle:
-
-```
-dependencies {
-	        implementation 'com.github.justmobiledev:android-secure-preferences-lib-1:1.0'
-	}
-```
-
-## Usage
-```java
-        // Create secure preferences
-        SharedPreferences securePreferences = new SecurePrefsBuilder()
-                .setApplication(MyApplication.getInstance())
-                .obfuscateValue(true)
-                .obfuscateKey(true)
-                .setSharePrefFileName("your_secure_preference_file_bname")
-                .createSharedPrefs(this);
-
-        // Add a preference
-        SharedPreferences.Editor editor = securePreferences.edit();
-
-        String prefValue = "test string";
-
-        // Store the string
-        editor.putString("test_key", prefValue);
-        editor.commit();
-
-        // Get the string
-        String prefValueRetrieved = securePreferences.getString("test_key", "");
-```
 
 ## Implementation
 * The SecurePrefsBuilder is a builder class used to specify properties for your shared preferences, e.g. file name, or if keys should be encrypted.
@@ -61,11 +28,6 @@ dependencies {
 * To see how your key and value are stored, open the 'Device Explorer' from the right Android Studio tab, and go to data\data\com.mobile.justmobiledev.androidsecurepreferences1\shared_prefs\my_secure_prefs_file.xml.
 You can right-click on the file and 'Save As' to a temp directory on your computer. The file content should show the encrypted key and value, e.g.
 
-```xml
-<map>
-    <string name="atgF69t3sjhUZwJosmIRZSfgXLQhg21FxbrJ534ATXo=&#10;">pXJ7qfFftbUlMozjOidT6EBXwX4l5go2XE3mo/DVrxw=&#10;    </string>
-</map>
-```
 
 ## Sample App Usage
 1. When the app is started, you can enter a preference value into the first field.
