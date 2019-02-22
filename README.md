@@ -1,23 +1,16 @@
-# Android library for storing preferences securely (Java)
+# Android Sample App for Exploring Sensors (Kotlin)
 
 ## Overview
-The purpose or this project is to show how preferences can be stored securely in your app.
-For example, sometimes it is necessary to store sensitive user information persistently in your app (e.g. a user's DOB or ddress).
-The default Android SharedPreferences are saved in a plain text XML file in the app's internal storage, so not a good place to store sensitive information.
-
-This project shows you how to create a wrapper around the standard SharedPreferences class that encrypts both preference keys and values with a strong encryption algorithm.
-
-Both preference keys and values can be encrypted using AES-256 CBC mode. Encryption keys are generated when the SecurePreferences are intialized and stored in the Android KeyStore.
-
-NOTE: Use at your own risk. The library has not been tested in a production app
+This project is a sample app for exploring device sensors for my [blog post on justmobiledev.com](http://justmobiledev.com/exploring-device-sensors-with-kotlin/).
+It implements asynchronous sensor data collection for light, temperature and gyroscope and displays the results.
 
 ## Supporting material
-For more detailed information about the implementation, please see my [blog post on storing preferences securely](http://justmobiledev.com/storing-preferences-securely-on-android/).
+For more detailed information about the implementation, please see my [blog post on exploring device sensors with Kotlin](http://justmobiledev.com/exploring-device-sensors-with-kotlin/).
 
-The Android documentation on [the Android Keystore System](https://developer.android.com/training/articles/keystore) is a good read to better understand the project.
+The Android documentation on [Sensor Types](https://source.android.com/devices/sensors/sensor-types) is a good read to better understand the project.
 
 ## Getting Started
-Add the SecurePreferences library to your root build.gradle at the end of repositories:
+Clone the project
 
 ```
 	allprojects {
